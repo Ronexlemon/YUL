@@ -52,5 +52,11 @@ contract YulTest is Test {
         console.log(result);
         assertEq(result, 6);
     }
+    function test_square()public{
+        uint256 result = yul.yul_square(5);
+        console.log(result);
+        assertEq(result, 25);
+    }
+    
    
 }

@@ -36,6 +36,12 @@ function yul_forLoop_sum(uint256 _num)public pure returns(uint256 _total){
         for{let i:=0} iszero(gt(i, _num)){i:=add(i,1)}{_total := add(_total,i)}
     }
 }
+//square
+function yul_square(uint256 _num)public pure returns(uint256 _result){
+    assembly {
+        _result := mul(_num,_num)
+    }
+}
 
 }
 
