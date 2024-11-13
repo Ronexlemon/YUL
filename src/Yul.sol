@@ -42,6 +42,13 @@ function yul_square(uint256 _num)public pure returns(uint256 _result){
         _result := mul(_num,_num)
     }
 }
+ //error
+    function yul_error(uint256 _num)public pure{
+        assembly {
+            if gt(_num,10) {revert(0,0)}
+            
+        }
+    }
 
 }
 

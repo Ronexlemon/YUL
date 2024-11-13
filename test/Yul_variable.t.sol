@@ -58,5 +58,16 @@ contract YulTest is Test {
         assertEq(result, 25);
     }
     
+    //revert error
+    function testFail_revert()public{
+        vm.expectRevert();
+        yul.yul_error(2);
+        }
+    function test_error()public{
+        vm.expectRevert();
+        yul.yul_error(20);
+
+    }
+   
    
 }
