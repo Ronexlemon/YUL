@@ -28,5 +28,14 @@ contract Yul{
     }
 }
 
+//loop
+//for
+
+function yul_forLoop_sum(uint256 _num)public pure returns(uint256 _total){
+    assembly {
+        for{let i:=0} iszero(gt(i, _num)){i:=add(i,1)}{_total := add(_total,i)}
+    }
+}
+
 }
 

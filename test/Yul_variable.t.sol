@@ -45,4 +45,12 @@ contract YulTest is Test {
         assertEq(_result, expected);
         
     }
+    //for loop 3 => 1+2+3 = 6 ,1+2+3+4 =10 , 1+2+3+4+5 =15
+
+    function test_addtion()public{
+        uint256 result = yul.yul_forLoop_sum(3);
+        console.log(result);
+        assertEq(result, 6);
+    }
+   
 }
