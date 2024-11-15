@@ -50,5 +50,18 @@ function yul_square(uint256 _num)public pure returns(uint256 _result){
         }
     }
 
+    //power
+    function power(uint256 base,uint256 exponent)public returns(uint256 result){
+        assembly {
+            switch exponent
+            case 0 {result := 1}
+            case 1 {result :=base}
+            default{
+                result := 10
+            }
+            
+        }
+    }
+
 }
 
