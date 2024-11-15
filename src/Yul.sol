@@ -57,7 +57,10 @@ function yul_square(uint256 _num)public pure returns(uint256 _result){
             case 0 {result := 1}
             case 1 {result :=base}
             default{
-                result := 10
+                result :=1
+                for {let i:=0} lt(i,exponent) {i:=add(i,1)}{
+                    result := mul(result,base)
+                }
             }
             
         }

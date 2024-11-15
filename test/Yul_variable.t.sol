@@ -70,8 +70,8 @@ contract YulTest is Test {
     }
 
     function test_power()public{
-        uint256 result = yul.power(10, 1);
-        assertEq(result, 10);
+        uint256 result = yul.power(10, 4);
+        assertEq(result, 10000);
     }
    
    
