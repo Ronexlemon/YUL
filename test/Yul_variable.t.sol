@@ -74,5 +74,10 @@ contract YulTest is Test {
         assertEq(result, 10000);
     }
    
+   function test_loadMemory()public{
+    bytes32 mem = yul.loadMemory();
+    //console.log(mem);
+    assertEq(mem, bytes32(uint256(0x80)));
+   }
    
 }

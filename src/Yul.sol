@@ -2,6 +2,7 @@
 pragma solidity ^0.8.2;
 
 contract Yul{
+    uint256 marks =10;
 
     function yul_let()public pure returns(uint256 z){
         assembly {
@@ -63,6 +64,12 @@ function yul_square(uint256 _num)public pure returns(uint256 _result){
                 }
             }
             
+        }
+    }
+    //loadmemory
+    function loadMemory()public returns(bytes32 mem){
+        assembly {
+            mem:= mload(0x40)
         }
     }
 
