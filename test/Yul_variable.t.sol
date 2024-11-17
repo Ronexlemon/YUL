@@ -104,5 +104,16 @@ bytes32 b;
     bytes32 z = yul.sStore();
     assertEq(z,bytes32(uint256(0x80))); //we have 128 which is hex 0x80
    }
+   /****
+    * Comparison and bitwise
+    * 
+    */
+   function test_lessThan_EqualTo()public{
+    uint256 a;
+    uint256 b;
+    (a,b) = yul.lessThanOrEqualTo(10, 20);
+    assertEq(a, 1);
+    assertEq(b, 0);
+   }
    
 }

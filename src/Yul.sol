@@ -112,6 +112,16 @@ function yul_square(uint256 _num)public pure returns(uint256 _result){
             z:= sload(2)
         }
     }
+    /*****8
+     * Comparison and bitWise
+     */
+    function lessThanOrEqualTo(uint256 a, uint256 b)public pure returns(uint256 result,uint256 resultb){
+        assembly {
+            //if a<b then result = 1 else result = 0
+            result := lt(a,b)
+            resultb := eq(a,b)
+        }
+    }
 
 }
 
