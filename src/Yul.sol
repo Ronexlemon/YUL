@@ -122,6 +122,15 @@ function yul_square(uint256 _num)public pure returns(uint256 _result){
             resultb := eq(a,b)
         }
     }
+    /****
+     * Environment Operation
+     */
+    function calleR()public view returns(address _caller){
+        assembly {
+            //get the address of the caller
+            _caller:= caller()
+        }
+    }
 
 }
 

@@ -17,7 +17,7 @@ contract YulTest is Test {
     }
 
    
-     function test_multipication()public{
+     function test_multipication()public view{
         uint256 z = yul.yul_let();
         console.log(z);
         assertEq(z,200);       
@@ -25,13 +25,13 @@ contract YulTest is Test {
     }
     //conditional teting
 
-    function test_condition()public{
+    function test_condition()public view{
     uint256  _result = yul.yul_condition(1);
         console.log(_result);
         assertEq(_result, 2);
     }
     //conditio test fuzz
-    function testFuzz_condition(uint256 x)public{
+    function testFuzz_condition(uint256 x)public view{
         uint256  _result = yul.yul_condition(x);
         console.log(_result);
       uint256 expected;
@@ -47,19 +47,19 @@ contract YulTest is Test {
     }
     //for loop 3 => 1+2+3 = 6 ,1+2+3+4 =10 , 1+2+3+4+5 =15
 
-    function test_addtion()public{
+    function test_addtion()public view{
         uint256 result = yul.yul_forLoop_sum(3);
         console.log(result);
         assertEq(result, 6);
     }
-    function test_square()public{
+    function test_square()public view{
         uint256 result = yul.yul_square(5);
         console.log(result);
         assertEq(result, 25);
     }
     
     //revert error
-    function testFail_revert()public{
+    function testFail_revert()public {
         vm.expectRevert();
         yul.yul_error(2);
         }
@@ -69,7 +69,7 @@ contract YulTest is Test {
 
     }
 
-    function test_power()public{
+    function test_power()public {
         uint256 result = yul.power(10, 4);
         assertEq(result, 10000);
     }
@@ -82,7 +82,7 @@ contract YulTest is Test {
    /*****
     * Memory
     */
-   function test_msload_mstore()public{
+   function test_msload_mstore()public view{
     bytes32 z = yul.mLoad();
    
    assertEq(z,bytes32(uint256(0x14))); //that is 20 in decimal
@@ -93,7 +93,7 @@ contract YulTest is Test {
     * Storage
     */
 
-   function test_sload()public{
+   function test_sload()public view{
     bytes32 z;
 bytes32 b;
     (z,b) = yul.sLoad();
@@ -108,12 +108,21 @@ bytes32 b;
     * Comparison and bitwise
     * 
     */
-   function test_lessThan_EqualTo()public{
+   function test_lessThan_EqualTo()public view{
     uint256 a;
     uint256 b;
     (a,b) = yul.lessThanOrEqualTo(10, 20);
     assertEq(a, 1);
     assertEq(b, 0);
+   }
+
+   /*****
+    * Environmental Variables
+    */
+   function test_caller()public view{
+    address _caller = yul.calleR();
+    console.log(_caller);
+    assertEq(_caller, address(this));
    }
    
 }
