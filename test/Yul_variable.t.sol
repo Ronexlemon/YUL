@@ -79,5 +79,15 @@ contract YulTest is Test {
     //console.log(mem);
     assertEq(mem, bytes32(uint256(0x80)));
    }
+   /*****
+    * Memory
+    */
+   function test_msload_mstore()public{
+    bytes32 z = yul.mLoad();
+   
+   assertEq(z,bytes32(uint256(0x14))); //that is 20 in decimal
+   
+
+   }
    
 }

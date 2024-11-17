@@ -72,6 +72,21 @@ function yul_square(uint256 _num)public pure returns(uint256 _result){
             mem:= mload(0x40)
         }
     }
+    
+    //memory Operation
+    //mload -> loads  32 bytes of data from a specific location
+    function mLoad()public view returns(bytes32 z){
+        assembly {
+            //load the free memory pointer space 128 i decimal -> 0x80 in hex
+            let freeMem:=mload(0x40)
+            //store 20 at 0x80
+            mstore(0x80,20)
+            //load 32 bytes from 0x80
+            z:=mload(0x80)
+            
+        }
+    }
+    
 
 }
 
