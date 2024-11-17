@@ -100,5 +100,9 @@ bytes32 b;
     assertEq(z,bytes32(uint256(0x0a))); //we have 10 in decimal which is a in hexdecimal
     assertEq(b,bytes32(uint256(0x00))); //we have nothing
    }
+   function test_sstore()public{
+    bytes32 z = yul.sStore();
+    assertEq(z,bytes32(uint256(0x80))); //we have 128 which is hex 0x80
+   }
    
 }

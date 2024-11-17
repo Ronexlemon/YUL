@@ -89,6 +89,7 @@ function yul_square(uint256 _num)public pure returns(uint256 _result){
     /****
      * Storage operations
      * sload -> loads data from a storage slot
+     * store -> store a value at a slot
      */
     function sLoad()public view returns(bytes32 z,bytes32 b){
         assembly {
@@ -101,6 +102,14 @@ function yul_square(uint256 _num)public pure returns(uint256 _result){
             b:=data2
             
             
+        }
+    }
+    function sStore()public  returns(bytes32 z){
+        assembly {
+            //store 128 at slot 2
+             sstore(2,128)
+            //return the value of v
+            z:= sload(2)
         }
     }
 
