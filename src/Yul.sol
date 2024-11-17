@@ -78,15 +78,31 @@ function yul_square(uint256 _num)public pure returns(uint256 _result){
     function mLoad()public view returns(bytes32 z){
         assembly {
             //load the free memory pointer space 128 i decimal -> 0x80 in hex
-            let freeMem:=mload(0x40)
+            let freeMem:=mload(0x80)
             //store 20 at 0x80
-            mstore(0x80,20)
+            mstore(freeMem,20)
             //load 32 bytes from 0x80
-            z:=mload(0x80)
+            z:=mload(freeMem)
             
         }
     }
-    
+    /****
+     * Storage operations
+     * sload -> loads data from a storage slot
+     */
+    function sLoad()public view returns(bytes32 z,bytes32 b){
+        assembly {
+            //load from slot 0
+            let data := sload(0)
+            //load from slot 1
+            let data2 := sload(1)
+            //store data and data2 in z and b
+            z:=data
+            b:=data2
+            
+            
+        }
+    }
 
 }
 

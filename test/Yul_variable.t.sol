@@ -89,5 +89,16 @@ contract YulTest is Test {
    
 
    }
+   /***
+    * Storage
+    */
+
+   function test_sload()public{
+    bytes32 z;
+bytes32 b;
+    (z,b) = yul.sLoad();
+    assertEq(z,bytes32(uint256(0x0a))); //we have 10 in decimal which is a in hexdecimal
+    assertEq(b,bytes32(uint256(0x00))); //we have nothing
+   }
    
 }
