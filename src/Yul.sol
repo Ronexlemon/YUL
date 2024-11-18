@@ -155,6 +155,11 @@ function yul_square(uint256 _num)public pure returns(uint256 _result){
             _txorigin := origin()
         }
     }
+    function getHashOfThePreviousBlock()public view returns(bytes32 hash){
+        assembly {
+            hash:= blockhash(sub(number(),1))
+        }
+    }
 
 }
 

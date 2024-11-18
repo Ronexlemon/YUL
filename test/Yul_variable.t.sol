@@ -144,5 +144,10 @@ bytes32 b;
     assertEq(z, msg.sender);
    }
 
+function test_previous_block_hash()public view{
+    bytes32 hash = yul.getHashOfThePreviousBlock();
+    
+    assertEq(hash,blockhash(block.number-1));
+}
    
 }
