@@ -124,5 +124,13 @@ bytes32 b;
     console.log(_caller);
     assertEq(_caller, address(this));
    }
+   /***
+    * Control and operation
+    */
+   function test_calldataload_functionSelector()public view{
+    bytes4 z = yul.callCallData();
+    assertEq(z,bytes4(keccak256("callCallData()")));
+
+   }
    
 }

@@ -132,5 +132,15 @@ function yul_square(uint256 _num)public pure returns(uint256 _result){
         }
     }
 
+    /*****
+     * Control
+     */
+    function callCallData()public view returns(bytes4 result){
+        assembly {
+            let b := calldataload(0)
+            result := b
+        }
+    }
+
 }
 
