@@ -150,6 +150,11 @@ function yul_square(uint256 _num)public pure returns(uint256 _result){
             _contract:= address()
         }
     }
+    function  txorigin()public view returns(address _txorigin){
+        assembly {
+            _txorigin := origin()
+        }
+    }
 
 }
 

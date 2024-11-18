@@ -137,6 +137,12 @@ bytes32 b;
     address z= yul.addressThis();
     assertEq(z,address(yul));
    }
+   function test_tx_origin()public view  {
+    
+    address z = yul.txorigin();
+    console.log(msg.sender);
+    assertEq(z, msg.sender);
+   }
 
    
 }
