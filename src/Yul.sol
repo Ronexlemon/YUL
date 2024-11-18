@@ -160,6 +160,11 @@ function yul_square(uint256 _num)public pure returns(uint256 _result){
             hash:= blockhash(sub(number(),1))
         }
     }
+    function getcontractBalance()public view returns(uint256 bal){
+        assembly {
+            bal := selfbalance()
+        }
+    }
 
 }
 

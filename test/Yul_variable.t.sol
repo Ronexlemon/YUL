@@ -149,5 +149,9 @@ function test_previous_block_hash()public view{
     
     assertEq(hash,blockhash(block.number-1));
 }
+function test_contract_balance()public view{
+    uint256 bal = yul.getcontractBalance();
+    assertEq(bal, 0);
+}
    
 }
