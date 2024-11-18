@@ -141,6 +141,15 @@ function yul_square(uint256 _num)public pure returns(uint256 _result){
             result := b
         }
     }
+    /*****
+     * Return Address
+     */
+    function addressThis()public view returns(address  _contract){
+        assembly {
+            //get the address of the contract
+            _contract:= address()
+        }
+    }
 
 }
 

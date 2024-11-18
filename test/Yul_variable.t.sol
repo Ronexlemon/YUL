@@ -132,5 +132,11 @@ bytes32 b;
     assertEq(z,bytes4(keccak256("callCallData()")));
 
    }
+
+   function test_contract_address()public view{
+    address z= yul.addressThis();
+    assertEq(z,address(yul));
+   }
+
    
 }
