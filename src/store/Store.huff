@@ -1,0 +1,18 @@
+//send calldata -> function dispatch "geting the function selector" -> "route" function
+//60008060093d393df3 ->contract creation bytecode
+// ??  ->runtime code
+#define macro MAIN()= takes(0) returns(0){
+//     //let find the function selector
+//     //PUSH0  //or 0x00 -> same as push 0 into the stack
+//    0x00    //[0]
+//   // 0x02    //TOP [2,0] BOTTOM
+//   calldataload   //[calldata] ->it includes even the function selector "function slector is the first four bytes of a function"
+//   //?? How to cut down the calldata => function selector
+// 0xe0  //[0xe0,calldata(32)]
+// shr    // [function_selector]
+
+0x00 calldataload 0xe0  shr
+
+
+
+}
