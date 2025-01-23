@@ -6,6 +6,7 @@ contract Receiver{
     fallback() external payable { 
 emit Received(msg.sender,msg.value,"fallback was called");
     }
+    receive() external payable{}
 
     function foo(string memory _message,uint256 _x)public payable returns(uint256){
         emit Received(msg.sender, msg.value, _message);
