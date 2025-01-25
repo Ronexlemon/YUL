@@ -1,6 +1,10 @@
 //send calldata -> function dispatch "geting the function selector" -> "route" function
 //60008060093d393df3 ->contract creation bytecode
 // ??  ->runtime code
+
+/**Interfaces*/
+#define function  updateNumberOfItems(uint256) nonpayable returns()
+#define function getNumberOfItems() view returns(uint256)
 #define macro MAIN()= takes(0) returns(0){
 //     //let find the function selector
 //     //PUSH0  //or 0x00 -> same as push 0 into the stack
@@ -18,7 +22,7 @@
 //0xa9d68806 => updateNumberOfItems(uint256) => update
 //0x730ef269 => getNumberOfItems() => get
 dup1                  //Duplicating [function_selector,function_selector]
-0xa9d68806      //[0xa9d68806,,function_selector,function_selector]
+__FUNC_SIG(updateNumberOfItems)      //[0xa9d68806,,function_selector,function_selector]
 eq              //[true_if_func_slector_matches,function_Selector]
 
 //jump to updateNumberOfItems(uint256) if true
@@ -26,10 +30,12 @@ updateNumberOfItems       //[updateNumberOfItemsProgramCounter,true/false,functi
 jumpi      // [function_selector]
 
 //getNumberOfItems()
-0x730ef269       //[0x730ef269,function_selector]
+__FUNC_SIG(getNumberOfItems)      //[0x730ef269,function_selector]
 eq               //[true_if_func_selector_matches]
 getNumberOfItems       //[getNumberOfItemsProgramCounter,true/false]
 jumpi                //[]
+
+0x00 0x00 revert  //[]
 //if true jump to getNumberOfItems()
 getNumberOfItems:
        GET_NUMBER_OF_ITEMS()
