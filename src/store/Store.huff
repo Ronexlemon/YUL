@@ -7,7 +7,7 @@
 #define function getNumberOfItems() view returns(uint256)
 
 
-#define constant NUMBER_OF_ITEMS_STORAGE_SLOT = FREE_STORAGE_POINTER(); //0
+#define constant NUMBER_OF_ITEMS_STORAGE_SLOT = FREE_STORAGE_POINTER() //0
 #define macro MAIN()= takes(0) returns(0){
 //     //let find the function selector
 //     //PUSH0  //or 0x00 -> same as push 0 into the stack
@@ -60,7 +60,7 @@ updateNumberOfItems:
 
 #define macro SET_NUMBER_OF_ITEMS()= takes(0) returns(0){
      //get the value to store from calldata
-     0x04   //[4] => bytes
+     0x04   //[4] => bytes of the function selector
      calldataload // [input value]
     //give a storage store
     [NUMBER_OF_ITEMS_STORAGE_SLOT]   //[storage_slot,value] // [NUMBER_OF_ITEMS_STORAGE_SLOT] index in storage =>0
@@ -72,5 +72,15 @@ updateNumberOfItems:
 }
 
 #define macro GET_NUMBER_OF_ITEMS()=takes(0) returns(0){
+    //read from storage
+    //1. get the storage slot
+    //2. load the value from storage
+    [NUMBER_OF_ITEMS_STORAGE_SLOT]   //[storage_slot,value] // [NUMBER_OF_ITEMS_STORAGE]
+    sload     //[value]
+    0x00       //[0,value]
+    mstore  //[]    //memory: [value]
+    //0x20 => 32 bytes
+
+    0x20 0x00 return   //[]
     
 }
