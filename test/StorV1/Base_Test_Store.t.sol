@@ -13,9 +13,9 @@ function test_readValue()public view{
     uint256 val = store.getNumberOfItems();
     assertEq(val, 0);
 }
-function test_setNumber()public{
-    store.updateNumberOfItems(10);
+function test_setNumber(uint256 num)public{
+    store.updateNumberOfItems(num);
     uint256 val = store.getNumberOfItems();
-    assertEq(val, 10);
+    assertEq(val, num);
 }
 }
