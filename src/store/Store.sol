@@ -10,4 +10,7 @@ contract Store{
     function getNumberOfItems()external view returns(uint256){
         return numberOFItems;
     }
+    function resetNumber()external{
+        numberOFItems =0;
+    }
 }

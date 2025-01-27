@@ -5,6 +5,7 @@
 /**Interfaces*/
 #define function  updateNumberOfItems(uint256) nonpayable returns()
 #define function getNumberOfItems() view returns(uint256)
+#define function resetNumber()nonpayable returns()
 
 
 #define constant NUMBER_OF_ITEMS_STORAGE_SLOT = FREE_STORAGE_POINTER() //0
@@ -33,10 +34,17 @@ updateNumberOfItems       //[updateNumberOfItemsProgramCounter,true/false,functi
 jumpi      // [function_selector]
 
 //getNumberOfItems()
-__FUNC_SIG(getNumberOfItems)      //[0x730ef269,function_selector]
-eq               //[true_if_func_selector_matches]
-getNumberOfItems       //[getNumberOfItemsProgramCounter,true/false]
-jumpi                //[]
+dup1              //[function_selector,function_selector]
+__FUNC_SIG(getNumberOfItems)      //[0x730ef269,function_selector,function_selector]
+eq               //[true_if_func_selector_matches,function_selector]
+getNumberOfItems       //[getNumberOfItemsProgramCounter,true/false,function_selector]
+jumpi                //[function_selector]
+
+__FUNC_SIG(resetNumber)   //[function_selector,function_selector]
+eq   //[true_if_selector_matches]
+resetNumber       //[resetNumberProgramcounter,true/false]
+jumpi  //[]
+
 
 0x00 0x00 revert  //[]
 //if true jump to getNumberOfItems()
@@ -52,6 +60,9 @@ getNumberOfItems:
 
 updateNumberOfItems:
       SET_NUMBER_OF_ITEMS()
+
+resetNumber:
+    RESET_NUMBER_OF_ITEMS()
 
 
 
@@ -83,4 +94,15 @@ updateNumberOfItems:
 
     0x20 0x00 return   //[]
     
+}
+
+#define macro RESET_NUMBER_OF_ITEMS()=takes(0) returns(0){
+    //get the value to store from the calldata
+    0x04    // [4] => the size of the function selector
+    calldataload // [input value]
+    //give a storage store
+    [NUMBER_OF_ITEMS_STORAGE_SLOT]  //[storage_slot,value]
+    //store
+    sstore
+    stop
 }
