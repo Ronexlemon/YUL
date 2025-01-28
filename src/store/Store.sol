@@ -13,4 +13,7 @@ contract Store{
     function resetNumber()external{
         numberOFItems =0;
     }
+    function square()external{
+        numberOFItems=numberOFItems *numberOFItems;
+    }
 }

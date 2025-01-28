@@ -6,6 +6,7 @@
 #define function  updateNumberOfItems(uint256) nonpayable returns()
 #define function getNumberOfItems() view returns(uint256)
 #define function resetNumber()nonpayable returns()
+#define function square()nonpayable returns()
 
 
 #define constant NUMBER_OF_ITEMS_STORAGE_SLOT = FREE_STORAGE_POINTER() //0
@@ -39,11 +40,16 @@ __FUNC_SIG(getNumberOfItems)      //[0x730ef269,function_selector,function_selec
 eq               //[true_if_func_selector_matches,function_selector]
 getNumberOfItems       //[getNumberOfItemsProgramCounter,true/false,function_selector]
 jumpi                //[function_selector]
-
-__FUNC_SIG(resetNumber)   //[function_selector,function_selector]
+dup1
+__FUNC_SIG(resetNumber)   //[function_selector,function_selector,function_selector]
 eq   //[true_if_selector_matches]
 resetNumber       //[resetNumberProgramcounter,true/false]
-jumpi  //[]
+jumpi  //[functionSlecor]
+
+__FUNC_SIG(square)  //  [function_selector,function_selector]
+eq     //[true_if_function_selector_matches]
+square       //[squareProgramCounter,true/false]
+jumpi
 
 
 0x00 0x00 revert  //[]
@@ -63,6 +69,8 @@ updateNumberOfItems:
 
 resetNumber:
     RESET_NUMBER_OF_ITEMS()
+square:
+    SQUARE_NUMBER()
 
 
 
@@ -105,4 +113,21 @@ resetNumber:
     //store
     sstore
     stop
+}
+
+#define macro SQUARE_NUMBER()= takes(0) returns(0){
+    
+
+    //get value from storage
+    [NUMBER_OF_ITEMS_STORAGE_SLOT]  // [storage_slot,value]
+    sload  // [value]
+    dup1    // [value,value]
+
+    //multiply the val
+    mul  //[value*value]
+    //store in the storage
+    [NUMBER_OF_ITEMS_STORAGE_SLOT]  // [storage_slot,totalmultiplicatedvalue]
+    sstore
+    stop
+
 }
