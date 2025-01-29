@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.2;
 
-contract Store{
+contract StoreYul{
     uint256 public numberOFItems;
 
     function updateNumberOfItems(uint256 _newNumber)external{
@@ -10,8 +10,11 @@ contract Store{
         sstore(numberOFItems.slot,_newNumber)
         }
     }
-    function getNumberOfItems()external view returns(uint256){
-        return numberOFItems;
+    function getNumberOfItems()external view returns(uint256 _result){
+        //return numberOFItems;
+        assembly {
+            _result := sload(numberOFItems.slot)
+        }
     }
     function resetNumber()external{
         numberOFItems =0;

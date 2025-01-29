@@ -2,11 +2,12 @@
 pragma solidity ^0.8.2;
 
 import {Store} from "../../src/store/Store.sol";
+import {IStore} from "../../src/store/IStore.sol";
 import {Test,console2} from "forge-std/Test.sol";
 abstract contract Base_TestV1_Store is Test{
-    Store public store;
+    IStore public store;
  function setUp()public virtual{
-    store = new Store();
+    store =  IStore(address(new Store()));
  }
     
 function test_readValue()public view{
