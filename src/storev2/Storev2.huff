@@ -2,6 +2,8 @@
 #define function mintHorse()nonpayable returns()
 #define function feedHorse(uint256) nonpayable returns(bool)
 #define function isHappyHorse(uint256) nonpayable returns(bool)
+#define function horseIdToFedTimeStamp(uint256) nonpayable returns()
+#define function HORSE_HAPPY_IF_FED_WITHIN() nonpayable returns(uint256)
 
 //Storage slots
 #define constant  NUMBER_OF_HORSER = FREE_STORAGE_POINTER()
@@ -28,10 +30,24 @@
     feed   // [feedHorseProgramCounter,true/false,function selector]
     jumpi   // [function_selector]
 
-    __FUNC_SIG(isHappyHorse)
+    dup1     // [function_selector]
+
+    __FUNC_SIG(isHappyHorse) // [isHappyHorse_Function_selector,function_selector]
     eq
-    isHappyHorse
-    jumpi
+    isHappyHorse   // [isHappyHorseProgramCounter,function_elector]
+    jumpi   // [function_selector]
+    //if not happy horse then jump to horseIdToFedTimeStamp
+    dup1
+    __FUNC_SIG(horseIdToFedTimeStamp) // [horseIdToFedTimeStamp_function_selector
+    eq
+    horseIdToFedTimeStamp   // [horseIdToFedTimeStampProgramCounter,function_selector]
+    jumpi   // [function_selector]
+    //if not horseIdToFedTimeStamp then jump to HORSE_HAPPY_IF_FED
+    
+    __FUNC_SIG(HORSE_HAPPY_IF_FED_WITHIN) // [HORSE_HAPPY_Function_Selector,function_selector]
+    eq
+    HORSE_HAPPY_IF_FED_WITHIN   // [HORSE_HAPPY_ProgramCounter,true/false]
+    jumpi   // []
 
 
 
@@ -48,6 +64,11 @@
       FEED_HORSE()
     isHappyHorse:
        IS_HAPPY_HORSE()
+    horseIdToFedTimeStamp:
+         HORSE_ID_TO_FED_TIMESTAMP()
+    HORSE_HAPPY_IF_FED_WITHIN:
+         HORSE_HAPPY_IF_FED_WITHIN()
+
      
 
 }
@@ -55,9 +76,18 @@
 
 }
 #define macro FEED_HORSE() = takes(0) returns(0){
+    timestamp    // [timestamp]
+    0x04
+    calldataload   //[horseId,timestamp]
+    //sstore the horse id
+
 
 }
 
 #define macro IS_HAPPY_HORSE() = takes(0) returns(0){
 
 }
+#define macro HORSE_ID_TO_FED_TIMESTAMP() = takes(0) returns(0){
+    }
+
+#define macro HORSE_HAPPY_IF_FED_WITHIN() = takes(0) returns(0){}
