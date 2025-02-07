@@ -6,6 +6,7 @@ import {IStore} from "../../src/store/IStore.sol";
 import {Test,console2} from "forge-std/Test.sol";
 abstract contract Base_TestV1_Store is Test{
     IStore public store;
+    
  function setUp()public virtual{
     store =  IStore(address(new Store()));
  }
