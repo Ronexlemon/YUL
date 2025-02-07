@@ -1,15 +1,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.2;
 
-import {ERC721Enumerable, ERC721} from "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+ import {ERC721Enumerable, ERC721} from "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import {IStorev2} from "./IStorev2.sol";
 
+
 /* 
- * @title HorseStore
- * @author equestrian_lover_420
+ * @title Storev2
+ * @author lemonr
  * @notice An NFT that represents a horse. Horses should be fed daily to keep happy, ideally several times a day. 
  */
-contract HorseStore is IStorev2, ERC721Enumerable {
+contract Storev2 is IStorev2, ERC721Enumerable {
     string constant NFT_NAME = "HorseStore";
     string constant NFT_SYMBOL = "HS";
     uint256 public constant HORSE_HAPPY_IF_FED_WITHIN = 1 days;
