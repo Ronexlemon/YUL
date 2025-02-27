@@ -1,0 +1,30 @@
+#include "../../lib/huffmate/src/data-structures/Hashmap.huff"
+#define function register() nonpayable returns()
+#define function getMember(uint256) view returns(address,bytes32,uint256)
+
+#define constant  MEMBER_MAP_LOCATION = FREE_STORAGE_POINTER() // storage slot for the mapping
+
+
+#define macro MAIN() = takes(0) returns(0){
+    
+    0x00   calldataload 0xe0 shr  // [ function selector]
+    
+    dup1  __FUNC_SIG(register) eq REGISTER jumpi 
+
+      __FUNC_SIG(getMember) eq GETMEMBER jumpi
+
+      0x00 0x00 revert
+
+
+    REGISTER:
+    REGISTER_MEMBER()
+
+    GETMEMBER:
+    GETMEMBER_MEMBER()
+    
+    
+}
+
+#define macro  REGISTER_MEMBER()= takes(0) returns(0){
+    
+}
