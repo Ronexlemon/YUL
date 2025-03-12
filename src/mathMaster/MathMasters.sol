@@ -38,7 +38,8 @@ library MathMasters {
         assembly {
             // Equivalent to `require(y == 0 || x <= type(uint256).max / y)`.
             if mul(y, gt(x, div(not(0), y))) {
-                mstore(0x40, 0xbac65e5b) // `MathMasters__MulWadFailed()`.
+                mstore(0x40, 0xbac65e5b) // `MathMasters__MulWadFailed()`.  //will revert with blank message  //wrong function selector
+                //fix mstore(0x00, 0xa56044f7)
                 revert(0x1c, 0x04)
             }
             z := div(mul(x, y), WAD)
